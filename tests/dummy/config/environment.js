@@ -1,9 +1,16 @@
 /* jshint node: true */
+var fs = require('fs');
 
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'dummy',
+    emberHighlightJs: {
+      style: 'arta'
+    },
     environment: environment,
+    languages: fs.readdirSync('node_modules/highlight.js/lib/languages').map(function(language) {
+      return language.replace(/\.js$/, '');
+    }),
     baseURL: '/',
     locationType: 'auto',
     EmberENV: {
