@@ -40,5 +40,8 @@
   ],
   "ember-addon": {
     "configPath": "tests/dummy/config"
+  },
+  "dependencies": {
+    "broccoli-stew": "^0.1.7"
   }
 }
