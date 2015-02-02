@@ -6,27 +6,18 @@ var log = require('broccoli-stew').log;
 
 module.exports = {
   name: 'ember-highlight-js',
-  treeFor: function(name)  {
-      var config = this.app.project.config().emberHighlightJs || {};
-      var style = config.style;
-
-      if (name === 'styles' && style) {
-        return log(find([
-          find(__dirname + '/vendor/highlight.js/styles/{' + style + '}.css'),
-          this._super.treeFor.apply(this, arguments)
-        ]));
-      }
-
-      return this._super.treeFor.apply(this, arguments);
-  },
 
   included: function included(app) {
     this.app = app;
 
     this._super.included(app);
 
-    var config = this.app.emberHighlightJs || {};
+    var config = this.app.project.config().emberHighlightJs || {};
     var style = config.style;
+
+    if (style) {
+      app.import('vendor/highlight.js/styles/' + style + '.css');
+    }
 
     app.import('vendor/highlight.js/index.js', {
       exports: {
